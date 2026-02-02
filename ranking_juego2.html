@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ranking Juego 2</title>
+
+<style>
+body{
+  background:#101820;
+  color:#fff;
+  font-family:Arial;
+  padding:40px;
+}
+.card{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  margin-bottom:30px;
+}
+img{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+}
+.pos{
+  font-size:30px;
+  font-weight:bold;
+}
+</style>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+
+<body>
+
+<h1>🏆 Ranking Juego 2</h1>
+<div id="ranking"></div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AQUI_API_KEY_JUEGO2",
+  authDomain: "ranking-juego2.firebaseapp.com",
+  databaseURL: "https://ranking-juego2-default-rtdb.firebaseio.com",
+  projectId: "ranking-juego2"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database().ref("jugadores");
+
+db.on("value", snap=>{
+  const jugadores=Object.values(snap.val()||{})
+    .sort((a,b)=>b.puntaje-a.puntaje);
+
+  ranking.innerHTML="";
+
+  jugadores.forEach((j,i)=>{
+    ranking.innerHTML+=`
+      <div class="card">
+        <div class="pos">#${i+1}</div>
+        <img src="${j.foto}">
+        <div>
+          <h2>${j.nombre}</h2>
+          <p>${j.puntaje} pts</p>
+        </div>
+      </div>`;
+  });
+});
+</script>
+
+</body>
+</html>

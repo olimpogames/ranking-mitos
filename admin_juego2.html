@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Admin Ranking - Juego 2</title>
+
+<!-- 🔒 PROTECCIÓN -->
+<script>
+if(localStorage.getItem("admin_juego2")!=="ok"){
+  location.href="login_juego2.html";
+}
+</script>
+
+<style>
+body{
+  background:#111827;
+  color:white;
+  font-family:Arial;
+  padding:20px;
+}
+
+h2{
+  margin-bottom:20px;
+}
+
+input,button{
+  padding:8px;
+  margin:5px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+th,td{
+  border:1px solid #333;
+  padding:8px;
+  text-align:center;
+}
+
+img{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+button{
+  background:#00c896;
+  border:none;
+  cursor:pointer;
+  color:white;
+}
+
+button:hover{
+  opacity:.8;
+}
+
+.logout{
+  background:#ff4d4d;
+}
+</style>
+</head>
+
+<body>
+
+<h2>🎮 Admin Juego 2</h2>
+
+<button class="logout" onclick="logout()">Cerrar Sesión</button>
+
+<br><br>
+
+<input id="nombre" placeholder="Nombre">
+<input id="puntaje" type="number" placeholder="Puntaje" value="0">
+<input id="foto" type="file" accept="image/*">
+<button onclick="agregar()">Agregar</button>
+
+<table>
+<thead>
+<tr>
+  <th>Foto</th>
+  <th>Nombre</th>
+  <th>Puntaje</th>
+  <th>Acciones</th>
+</tr>
+</thead>
+<tbody id="tabla"></tbody>
+</table>
+
+<!-- FIREBASE JUEGO 2 (PROYECTO SEPARADO) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AQUI_TU_API_KEY_JUEGO2",
+  authDomain: "TU_PROYECTO_JUEGO2.firebaseapp.com",
+  databaseURL: "https://TU_PROYECTO_JUEGO2-default-rtdb.firebaseio.com",
+  projectId: "TU_PROYECTO_JUEGO2"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+let jugadores = {};
+
+db.ref("jugadores").on("value", snap=>{
+  jugadores = snap.val() || {};
+  render();
+});
+
+function render(){
+  tabla.innerHTML="";
+  Object.values(jugadores)
+    .sort((a,b)=>b.puntaje-a.puntaje)
+    .forEach(j=>{
+      tabla.innerHTML += `
+      <tr>
+        <td><img src="${j.foto}"></td>
+        <td>${j.nombre}</td>
+        <td>${j.puntaje}</td>
+        <td>
+          <button onclick="mod('${j.id}',1)">+</button>
+          <button onclick="mod('${j.id}',-1)">-</button>
+          <button onclick="eliminar('${j.id}')">X</button>
+        </td>
+      </tr>
+      `;
+    });
+}
+
+function agregar(){
+  const n = nombre.value.trim();
+  const p = parseInt(puntaje.value) || 0;
+  const f = foto.files[0];
+
+  if(!n || !f){
+    alert("Nombre y foto obligatorios");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const id = Date.now().toString();
+    db.ref("jugadores/"+id).set({
+      id:id,
+      nombre:n,
+      puntaje:p,
+      foto:e.target.result
+    });
+    nombre.value="";
+    puntaje.value="0";
+    foto.value="";
+  };
+  reader.readAsDataURL(f);
+}
+
+function mod(id,valor){
+  if(!jugadores[id]) return;
+  jugadores[id].puntaje += valor;
+  db.ref("jugadores/"+id).set(jugadores[id]);
+}
+
+function eliminar(id){
+  db.ref("jugadores/"+id).remove();
+}
+
+function logout(){
+  localStorage.removeItem("admin_juego2");
+  location.href="login_juego2.html";
+}
+</script>
+
+</body>
+</html>
