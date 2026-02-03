@@ -61,6 +61,10 @@ button:hover{
 .logout{
   background:#ff4d4d;
 }
+
+.verRanking{
+  background:#3b82f6;
+}
 </style>
 </head>
 
@@ -69,6 +73,9 @@ button:hover{
 <h2>🎮 Admin Juego 2</h2>
 
 <button class="logout" onclick="logout()">Cerrar Sesión</button>
+<button class="verRanking" onclick="window.open('ranking_juego2.html','_blank')">
+Ver Ranking
+</button>
 
 <br><br>
 
@@ -89,7 +96,7 @@ button:hover{
 <tbody id="tabla"></tbody>
 </table>
 
-<!-- FIREBASE JUEGO 2 (PROYECTO SEPARADO) -->
+<!-- FIREBASE JUEGO 2 -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
@@ -175,4 +182,3 @@ function logout(){
 
 </body>
 </html>
-
