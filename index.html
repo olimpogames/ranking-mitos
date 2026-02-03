@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centro de Rankings</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:
+    linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.8)),
+    url("fondo.jpg") center/cover no-repeat;
+  font-family:Arial;
+  color:white;
+}
+
+.container{
+  text-align:center;
+  background:rgba(0,0,0,.6);
+  padding:50px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 40px rgba(0,0,0,.6);
+}
+
+h1{
+  margin-bottom:40px;
+  font-size:36px;
+  letter-spacing:2px;
+}
+
+.botones{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+button{
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.3s;
+  font-weight:bold;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+/* Colores distintos */
+.j1{ background:#cfa93f; color:black; }
+.j2{ background:#00c896; color:white; }
+.a1{ background:#8b5cf6; color:white; }
+.a2{ background:#ff4d4d; color:white; }
+
+@media(max-width:600px){
+  .container{
+    width:90%;
+    padding:30px;
+  }
+  h1{
+    font-size:24px;
+  }
+  button{
+    font-size:16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🎮 Centro de Rankings 🎮</h1>
+
+  <div class="botones">
+    <button class="j1" onclick="location.href='pagina2.html'">
+      🏴‍☠️ Ranking Juego 1
+    </button>
+
+    <button class="j2" onclick="location.href='ranking_juego2.html'">
+      🎮 Ranking Juego 2
+    </button>
+
+    <button class="a1" onclick="location.href='index_login_juego1.html'">
+      ⚓ Admin Juego 1
+    </button>
+
+    <button class="a2" onclick="location.href='login_juego2.html'">
+      🛡 Admin Juego 2
+    </button>
+  </div>
+</div>
+
+</body>
+</html>
