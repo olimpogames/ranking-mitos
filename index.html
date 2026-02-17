@@ -7,26 +7,30 @@
 
 <style>
 
-/* ================= FONDO ANIMADO ================= */
+/* ================= FONDO CON IMAGEN ================= */
 body{
   margin:0;
-  height:100vh;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   font-family:Arial, sans-serif;
   color:white;
   overflow:hidden;
-  background:#0f172a;
+  background:
+    linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.75)),
+    url("fondo2.png") center/cover no-repeat fixed;
 }
 
+/* Animación radial encima del fondo */
 body::before{
   content:"";
   position:fixed;
   width:200%;
   height:200%;
-  background:radial-gradient(circle at 20% 30%, rgba(56,189,248,.2), transparent 40%),
-             radial-gradient(circle at 80% 70%, rgba(139,92,246,.2), transparent 40%);
+  background:
+    radial-gradient(circle at 20% 30%, rgba(56,189,248,.2), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(139,92,246,.2), transparent 40%);
   animation:moverFondo 15s infinite alternate linear;
   z-index:-1;
 }
@@ -39,12 +43,13 @@ body::before{
 /* ================= CONTENEDOR ================= */
 .container{
   text-align:center;
-  background:rgba(0,0,0,.6);
+  background:rgba(0,0,0,.65);
   padding:60px;
   border-radius:25px;
   backdrop-filter:blur(15px);
   box-shadow:0 0 60px rgba(0,0,0,.8);
   animation:entrada 1s ease;
+  width:420px;
 }
 
 @keyframes entrada{
@@ -53,8 +58,8 @@ body::before{
 }
 
 h1{
-  margin-bottom:50px;
-  font-size:40px;
+  margin-bottom:40px;
+  font-size:36px;
   letter-spacing:3px;
 }
 
@@ -62,12 +67,12 @@ h1{
 .botones{
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:18px;
 }
 
 button{
-  padding:18px 35px;
-  font-size:18px;
+  padding:16px 30px;
+  font-size:16px;
   border:none;
   border-radius:15px;
   cursor:pointer;
@@ -77,7 +82,6 @@ button{
   overflow:hidden;
 }
 
-/* EFECTO NEON */
 button::after{
   content:"";
   position:absolute;
@@ -107,7 +111,7 @@ button:hover{
 .a2{ background:#ff4d4d; color:white; }
 .a3{ background:#f59e0b; color:black; }
 
-/* ================= TRANSICIÓN PORTAL ================= */
+/* ================= PORTAL ================= */
 .portal{
   position:fixed;
   width:100vw;
@@ -132,11 +136,10 @@ button:hover{
     padding:35px;
   }
   h1{
-    font-size:26px;
+    font-size:24px;
   }
   button{
-    font-size:16px;
-    padding:14px 20px;
+    font-size:14px;
   }
 }
 
@@ -148,34 +151,38 @@ button:hover{
 <div class="portal" id="portal"></div>
 
 <div class="container">
-  <h1>🎮 Centro de Rankings 🎮</h1>
+  <h1>🎮 OLIMPO 🎮</h1>
 
   <div class="botones">
 
-    <!-- 🔥 JUEGO 1 ACTUALIZADO -->
-    <button class="j1" onclick="ir('https://olimpogames.github.io/ranking-pirata/pagina2.html')">
-      🏴‍☠️ Ranking Juego 1
+    <button class="j1"
+      onclick="ir('https://olimpogames.github.io/ranking-pirata/pagina2.html')">
+      🏴‍☠️ ONE PIECE
     </button>
 
-    <button class="j2" onclick="ir('ranking_juego2.html')">
-      🎮 Ranking Juego 2
+    <button class="j2"
+      onclick="ir('ranking_juego2.html')">
+      🐉 MITOS Y LEYENDAS
     </button>
 
-    <button class="j3" onclick="ir('https://olimpogames.github.io/juego3/')">
-      🏆 Ranking Juego 3
+    <button class="j3"
+      onclick="ir('https://olimpogames.github.io/juego3/')">
+      🌀🔥 BEYBLADE BATTLE
     </button>
 
-    <!-- 🔥 ADMIN JUEGO 1 ACTUALIZADO -->
-    <button class="a1" onclick="ir('https://olimpogames.github.io/ranking-pirata/pagina1.html')">
-      ⚓ Admin Juego 1
+    <button class="a1"
+      onclick="ir('https://olimpogames.github.io/ranking-pirata/pagina1.html')">
+      ⚓ Almirante
     </button>
 
-    <button class="a2" onclick="ir('login_juego2.html')">
-      🛡 Admin Juego 2
+    <button class="a2"
+      onclick="ir('login_juego2.html')">
+      🛡 Guardian
     </button>
 
-    <button class="a3" onclick="ir('https://olimpogames.github.io/juego3/login.html')">
-      🔐 Admin Juego 3
+    <button class="a3"
+      onclick="ir('https://olimpogames.github.io/juego3/login.html')">
+      🌀 Maestro Beyblade
     </button>
 
   </div>
